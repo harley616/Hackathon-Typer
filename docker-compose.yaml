@@ -1,8 +1,8 @@
 version: "3"
 services:
-  backend-test:
+  backend:
     image: node:alpine3.17
-    container_name: backend-test
+    container_name: typer-backend-container
     working_dir: /app
     command: npm run dev
     ports:
@@ -12,33 +12,27 @@ services:
     environment:
       - NODE_ENV=test
     depends_on:
-      database-test:
-        condition: service_healthy
+      - database
 
   # PostgreSQL
-  database-test:
-    hostname: database-test
+  database:
+    hostname: database
     image: postgres:latest
-    container_name: postgres-test
+    container_name: typer-container
     ports:
       - "${DATABASE_TEST_PORT}:5432"
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     volumes:
       - ./sql-scripts:/docker-entrypoint-initdb.d # Mount directory for initial SQL files
 
 
   # React.js Frontend
-  frontend-test:
+  frontend:
     image: node:alpine3.17
-    container_name: frontend-test
+    container_name: frontend-container
     working_dir: /app
     command: npm run test
     volumes:
@@ -46,4 +40,4 @@ services:
     ports:
       - "4000:4000"
     depends_on:
-      - backend-test
+      - backend
