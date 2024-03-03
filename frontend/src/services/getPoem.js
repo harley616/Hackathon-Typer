@@ -3,18 +3,18 @@ import axios from 'axios';
 
 const levels={
     easy:"2/lines",
-    medium:"5/lines",
-    hard:"8/lines"
+    medium:"4/lines",
+    hard:"6/lines"
 }
 
 export default async function getPoem(level){
     const path=levels[level];
 
-    return await axios.get(`https://poetrydb.org/random,linecount/3;${path}`)
+    return axios.get(`https://poetrydb.org/random,linecount/3;${path}`)
     .then(response => {
-      const poemsinSingleString=response.data.map(poem=>poem.lines.join(" "));
-      console.log(poemsinSingleString);
-      return poemsinSingleString;
+      const poemString = response.data.map(poem => poem.lines.join(' '));
+      // console.log(response.data[0].lines);
+      return  poemString;
     })
     .catch(error => {
       console.error('error!', error);

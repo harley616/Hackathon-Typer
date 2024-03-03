@@ -16,8 +16,8 @@ const postScore = async (req, res) => {
   console.log('req.body', req.body)
   const {name, score} = req.body;
   try {
-    const result = await db.one('INSERT INTO scores (name, score) VALUES($1, $2) RETURNING *', [name, score]);
-    console.log('Success, inserted:', result.data);
+    const result = await db.one('INSERT INTO scores (score, name) VALUES($1, $2) RETURNING *', [score, name]);
+    console.log(res);
     res.status(201).json(result);
   } catch (error) {
     console.log(error)
@@ -28,7 +28,7 @@ const postScore = async (req, res) => {
 const getLeaderBoard = async (req, res) => {
     try {
         const result = await db.any('SELECT * FROM scores ORDER BY score DESC LIMIT 10');
-        console.log('Get leaderboard data', result);
+        console.log(result);
         res.status(200).json(result);
     } catch (error) {
         console.log(error)

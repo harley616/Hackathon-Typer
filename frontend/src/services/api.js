@@ -29,7 +29,7 @@ export default class Api {
     async postScore(data){
         try {
             const response = await this.api.post('/api/score', data);
-            return response;
+            return response.data;
         } catch (error) {
             return { error: error.message };
         }
@@ -38,7 +38,6 @@ export default class Api {
         // console.log('getLeaderBoard');
         try {
             const response = await this.api.get('/api/leaderboard');
-            console.log(response.data);
             return response.data;
         } catch (error) {
             return { error: error.message };
