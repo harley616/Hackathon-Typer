@@ -1,5 +1,5 @@
-import axios from 'axios';
-// const axios = require('axios');
+//import axios from 'axios';
+const axios = require('axios');
 
 const levels={
     easy:"5/lines",
@@ -10,13 +10,16 @@ const levels={
 export default function getPoem(level){
     const path=levels[level];
 
-    axios.get(`https://poetrydb.org/random,linecount/1;${path}`)
+    axios.get(`https://poetrydb.org/random,linecount/3;${path}`)
     .then(response => {
-      console.log(response.data[0].lines);
-      return response.data[0].lines;
+      const poemsinSingleString=response.data.map(poem=>poem.lines.join("\n"));
+      console.log(poemsinSingleString);
+      return poemsinSingleString;
     })
     .catch(error => {
       console.error('error!', error);
       return false;
     });
 }
+
+getPoem("easy");
