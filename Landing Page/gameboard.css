@@ -1,0 +1,62 @@
+.rectangle {
+    width: 480px; /* Adjust width as needed */
+    height: 380px; /* Adjust height as needed */
+    background-color: rgb(22, 98, 22); /* Background color similar to the "Start Game" button */
+    border: none; /* Remove the border */
+    color: white; /* Text color */
+    font-size: 18px; /* Adjust font size as needed */
+    font-family: serif; /* Font family */
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: bottom;
+    text-align: left;
+    margin-top: 230px; /* Add some margin at the top */
+}
+
+.rectangle p {
+    margin: 10px; /* Add margin to the paragraph inside the rectangle */
+}
+
+/*-----------*/
+
+/* CSS for top scorers banner */
+.top-scorers {
+    background-color: darkgreen;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 .10in; /* Add 1-inch margin on each side */
+    width: 43%; /* Set width for top scorers to take up half of the container */
+    position: absolute;
+    top: 59px;
+    left: 0;
+}
+
+.top-scorers h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.top-scorers ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.top-scorers li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* CSS for leaderboard page */
+.container {
+    position: absolute;
+    top: 0.33in; /* Add margin to the top */
+    left: 0.33in; /* Add margin to the left */
+    width: calc(50% - 0.66in); /* Adjusted width to account for margins */
+}
+
+
+.leaderboard-form {
+    width: 100%; /* Set width for form to take up full width of the container */
+}
