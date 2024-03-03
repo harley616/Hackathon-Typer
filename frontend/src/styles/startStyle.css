@@ -1,6 +1,6 @@
 /* CSS for index page */
 .index {
-    background-image: url('indexBackdrop.jpeg');
+    /* background-image: url('indexBackdrop.jpeg'); */
     background-size: cover;
     background-position: center center; /* Center the background image both horizontally and vertically */
     background-repeat: no-repeat;

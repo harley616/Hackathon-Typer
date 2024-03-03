@@ -6,7 +6,7 @@ export default function Game() {
   const [wpmList, setWpmList] = useState([]);
   const [iter, setIter] = useState(0);
   const [startTime, setStartTime] = useState(0);
-  const [testString, setTest] = useState(test[iter]);
+  const [testString, setTest] = useState('');
   const [okay, setOkay] = useState(true);
   const [done, setDone] = useState(false);
   const [wpm, setWpm] = useState(0)
