@@ -25,6 +25,7 @@ export default class Api {
             return { error: error.message };
         }
     }
+
     async postScore(score, name){
         try {
             const response = await this.api.post('/api/score', {score: score, name: name});
@@ -32,6 +33,15 @@ export default class Api {
         } catch (error) {
             return { error: error.message };
         }
+    }
+    async getLeaderBoard(){
+        console.log('getLeaderBoard');
+        // try {
+        //     const response = await this.api.get('/api/leaderboard');
+        //     return response.data;
+        // } catch (error) {
+        //     return { error: error.message };
+        // }
     }
 
 }

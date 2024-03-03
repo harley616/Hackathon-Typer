@@ -4,7 +4,6 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Login from './routes/login';
 import Game from './routes/game';
-import Landing from './routes/landing';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,7 +14,6 @@ const router = createBrowserRouter([
     children: [
       { path: '/login', element: <Login /> },
       {path: '/game', element: <Game />},
-      {path: '/landing', element: <Landing />},
     ]
   }
 ])
