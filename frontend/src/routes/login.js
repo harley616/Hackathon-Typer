@@ -1,8 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import {context} from './root';
 import '../styles/startStyle.css';
+import getPoem from '../services/getPoem';
 
 
 
@@ -10,10 +11,10 @@ import '../styles/startStyle.css';
 export default function Login() {
     const api = new Api();
     const [username, setUsername] = useState('');
-    const {setUser, setMessage} = useContext(context);
+    const {setUser, setMessage, setTest} = useContext(context);
     const [difficulty, setDifficulty] = useState('easy');
     const navigate = useNavigate();
-    const [leaderBoardData] = useState(api.getLeaderBoard());
+    const [leaderBoardData, setLeaderBoardData] = useState(null);
     async function handleRegister(){
         console.log(`username: ${username}, difficulty: ${difficulty}`);
         const res = await api.register(username);
@@ -23,10 +24,19 @@ export default function Login() {
         else{
             console.log(res);
             setUser(res[0].name);
+            setTest(await getPoem(difficulty))
             navigate('/game');
         }
     
     }
+
+    useEffect(() => {
+        const fetchLeaderBoard = async () => {
+            const data = await api.getLeaderBoard();
+            setLeaderBoardData(data);
+        }
+        fetchLeaderBoard();
+    },[])
 
   return (
     <div className="leaderboard">
