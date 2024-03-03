@@ -1,0 +1,178 @@
+/* CSS for index page */
+.index {
+    background-image: url('indexBackdrop.jpeg');
+    background-size: cover;
+    background-position: center center; /* Center the background image both horizontally and vertically */
+    background-repeat: no-repeat;
+}
+
+
+.index .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.index .container {
+    background-color: #dbfad0; /* Key lime color */
+}
+
+.index .big_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.index .big_button button {
+    width: 400px; /* Adjust width as needed */
+    height: 120px; /* Adjust height as needed */
+    background-color: rgb(22, 98, 22);
+    border-color: #fff;
+    color: white;
+    font-size: 36px; /* Adjust font size as needed */
+    border: none;
+    font-family: serif;
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer;
+}
+
+
+/* CSS for leaderboard page */
+.leaderboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #dbfad0; /* Key lime color */
+    padding: 0 1in; /* Add margins on each side of the box */
+}
+
+/* CSS for form container */
+.leaderboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #dbfad0; /* Background color of the page */
+    padding: 0 1in; /* Add margins on each side of the box */
+}
+
+/* CSS for form groups */
+.leaderboard-form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* CSS for form labels */
+.leaderboard-form-group label {
+    margin-right: 10px;
+}
+
+/* CSS for form inputs and select */
+.leaderboard-form-group input[type="text"],
+.leaderboard-form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif, serif; /* Use serif font */
+    box-sizing: border-box;
+}
+
+/* CSS for form submit button */
+.leaderboard-submit-button {
+    width: calc(100% - 20px); /* Adjusted width to accommodate margins */
+    padding: 15px; /* Increase padding to make the button bigger */
+    background-color: rgb(22, 98, 22); /* Background color similar to the "start game" button */
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.leaderboard-submit-button:hover {
+    background-color: darkgreen; /* Darker color on hover */
+}
+
+/* CSS for top scorers banner */
+.top-scorers {
+    background-color: darkgreen;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 1in; /* Add 1-inch margin on each side */
+}
+
+.top-scorers h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.top-scorers ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.top-scorers li {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* CSS for leaderboard page */
+.container {
+    display: flex;
+}
+
+.top-scorers {
+    width: 50%; /* Set width for top scorers to take up half of the container */
+}
+
+.leaderboard-form {
+    width: 50%; /* Set width for form to take up half of the container */
+}
+
+/* this is for the leaf decorations for the webpage
+/* CSS for index page */
+.index {
+    position: relative; /* Set the parent container to relative positioning */
+    background-color: #dbfad0; /* Key lime color */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Positioning for leaf decorations */
+.index .leaf {
+    position: absolute;
+}
+
+/* Positioning for leaf1 */
+.index .leaf1 {
+    top: 60%; /* Adjust as needed */
+    left: 10%; /* Adjust as needed */
+}
+
+/* Positioning for leaf2 */
+.index .leaf2 {
+    top: 60%; /* Adjust as needed */
+    right: 10%; /* Adjust as needed */
+}
+
+/* Positioning for leaf3 */
+.index .leaf3 {
+    bottom: 10%; /* Adjust as needed */
+    left: 20%; /* Adjust as needed */
+}
+
+/* Other styles for leaf decorations */
+.index .leaf {
+    width: 225px; /* Adjust width as needed */
+    height: 255px; /* Adjust height as needed */
+    border-radius: 50%; /* To make it round */
+    /* Add other styles as needed */
+}
+

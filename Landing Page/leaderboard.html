@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html>
-<label> First Name</label>
-<input type="text" name="" firstName">
-</div>
-<br>
-<div>
-    <label> Last Name</label>
-    <input type="" text" name="" lastName">
-</div>
-<div>
-    <label>Email</label>
-    <input type="" email" name"email">
-</div>
+
+<head>
+    <title>Leadership Board</title>
+    <link rel="stylesheet" type="text/css" href="startStyle.css"> <!-- Link to your CSS file -->
+</head>
+
+<body class="leaderboard">
+    <div class="container">
+        <div class="top-scorers">
+            <h2>Top Scorers</h2>
+            <ul class="top-scorers-list">
+                <li>John Doe - 250 points</li>
+                <li>Jane Smith - 200 points</li>
+                <li>Michael Johnson - 180 points</li>
+            </ul>
+        </div>
+        <div class="leaderboard-form">
+            <form action="submit.php" method="post">
+                <div class="leaderboard-form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="fullName">
+                </div>
+                <div class="leaderboard-form-group">
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty" name="difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="leaderboard-form-group">
+                    <input type="submit" class="leaderboard-submit-button" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
 
 </html>
