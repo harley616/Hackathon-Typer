@@ -29,7 +29,10 @@ export default function Game() {
   const navigate = useNavigate();
 
   function updateWpm(){
-    setWpm(Math.floor((typed.split(' ')/(Date.now() - startTime)*1000)*60))
+    console.log(typed)
+    console.log(Date.now() - startTime)
+    setWpm(Math.floor((typed.split(' ').length/(Date.now() - startTime)*1000)*60))
+    setWpmList([...wpmList, wpm]);
   }
   function finishedString(){
     console.log('finishedString')
@@ -88,8 +91,9 @@ export default function Game() {
       <>
       <div className="relative">
 
-      <textarea className="w-100 h-40 bg-sky-100 text-black p-1" onChange={(e) => {
+      <textarea className="w-64 h-40 bg-sky-100 text-black p-1" onChange={(e) => {
         if(e.target.value.charAt(e.target.value.length - 1) !== testString[e.target.value.length - 1]){
+          updateWpm();
           setOkay(false);
         }else{
           if(e.target.value.charAt(e.target.value.length - 1) === testString[0] && !typping){
@@ -105,7 +109,7 @@ export default function Game() {
         }
         }}>
       </textarea>
-      <div className="w-100 h-40 bg-none text-black opacity-25 absolute top-0 left-0 pointer-events-none p-1">
+      <div className="w-64 h-40 bg-none text-black opacity-25 absolute top-0 left-0 pointer-events-none p-1">
         {testString}
       </div>
       </div>
@@ -121,7 +125,6 @@ export default function Game() {
       <>
       <div> Failed</div>
       <div onClick={() => {startOver()}}>Try again</div>
-      <div>You had an avg apm of: {avg(wpmList)}</div>
       </>
 
       }

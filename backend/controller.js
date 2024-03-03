@@ -26,7 +26,7 @@ const postScore = async (req, res) => {
 
 const getLeaderBoard = async (req, res) => {
     try {
-        const result = await db.any('SELECT * FROM scores ORDER BY score LIMIT 10');
+        const result = await db.any('SELECT * FROM scores ORDER BY score DESC LIMIT 10');
         console.log(result);
         res.status(200).json(result);
     } catch (error) {
