@@ -13,24 +13,37 @@ const app = express();
 // Parse Json requests
 app.use(express.json());
 
-// Allows cross origin requests
 const cors = require('cors');
 
-// Allowed origins
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:4000'];
 
-// CORS options to dynamically match the allowed origins and allow credentials
-const corsOptionsDelegate = function (req, callback) {
-  let corsOptions;
-  if (allowedOrigins.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true, credentials: true }; // Reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // Disable CORS for this request
-  }
-  callback(null, corsOptions); // Callback expects two parameters: error and options
-};
+// Allows cross origin requests
+// const cors = require('cors');
 
-app.use(cors(corsOptionsDelegate));
+// // Allowed origins
+const allowedOrigins = ['http://localhost:3000'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+// // CORS options to dynamically match the allowed origins and allow credentials
+// const corsOptionsDelegate = function (req, callback) {
+//   let corsOptions;
+//   if (allowedOrigins.indexOf(req.header('Origin')) !== -1) {
+//     corsOptions = { origin: true, credentials: true }; // Reflect (enable) the requested origin in the CORS response
+//   } else {
+//     corsOptions = { origin: false }; // Disable CORS for this request
+//   }
+//   callback(null, corsOptions); // Callback expects two parameters: error and options
+// };
+
+// app.use(cors({origin: true, credentials: false}));
 
 // Parses cookies attached to the client request object
 const cookieParser = require('cookie-parser');
@@ -38,10 +51,9 @@ app.use(cookieParser());
 
 // Import router objects and direct the app to use them
 const router = require('./router');
-// Routes overlapped with the frontend
 app.use('/api', router);
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.status(202).send('Hello World!');
 });
 
@@ -55,17 +67,6 @@ but the container's port 3000 is mapped externally to 3001.
 TL;DR the backend is running on port 3001 on the host machine.
 */
 
-if (process.env.NODE_ENV === 'test') {
-  app.listen(process.env.BACKEND_TEST_PORT, () => {
-    console.log(`PIM backend app listening on port ${process.env.BACKEND_TEST_PORT}`);
-  });
-  // export app to import into test files
-  module.exports = app;
-  return;
-}
-else if (process.env.NODE_ENV === 'dev') { 
-  app.listen( process.env.BACKEND_PORT, () => {
-    console.log(`PIM backend app listening on port ${process.env.BACKEND_PORT}`);
-  });
-  return;
-}
+app.listen( process.env.BACKEND_PORT, () => {
+  console.log(`Typer backend app listening on port ${process.env.BACKEND_PORT}`);
+});

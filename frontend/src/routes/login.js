@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import {context} from './root';
+
 
 
 
 
 export default function Login() {
     const [username, setUsername] = useState('');
+    const {setUser} = useContext(context);
     const navigate = useNavigate();
     async function handleRegister(){
         const api = new Api();
@@ -16,6 +19,7 @@ export default function Login() {
         }
         else{
             console.log(res);
+            setUser(res.name);
             navigate('/game');
         }
     

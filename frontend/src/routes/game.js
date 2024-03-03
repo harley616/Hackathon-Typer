@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-let test = ["This is the first test string.", "This is the second string.", "Now you are getting after it, here is the third string."]
+
 export default function Game() {
 
   const [wpmList, setWpmList] = useState([]);

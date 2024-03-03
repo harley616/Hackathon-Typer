@@ -6,11 +6,9 @@ services:
     working_dir: /app
     command: npm run dev
     ports:
-      - "${BACKEND_TEST_PORT}:4000"
+      - "${BACKEND_PORT}:3001"
     volumes:
       - ./backend:/app
-    environment:
-      - NODE_ENV=test
     depends_on:
       - database
 
@@ -20,7 +18,7 @@ services:
     image: postgres:latest
     container_name: typer-container
     ports:
-      - "${DATABASE_TEST_PORT}:5432"
+      - "${DATABASE_PORT}:5432"
     environment:
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USER}
@@ -34,10 +32,10 @@ services:
     image: node:alpine3.17
     container_name: frontend-container
     working_dir: /app
-    command: npm run test
+    command: npm start
     volumes:
       - ./frontend:/app
     ports:
-      - "4000:4000"
+      - "3000:3000"
     depends_on:
       - backend
