@@ -11,11 +11,11 @@ export default function Login() {
     const api = new Api();
     const [username, setUsername] = useState('');
     const {setUser} = useContext(context);
-    const [difficulty, setDifficulty] = useState('easy');
+    const [difficulty, setDifficulty] = useState('easy');  
     const navigate = useNavigate();
     const [leaderBoardData, setLeaderBoardData] = useState(api.getLeaderBoard());
     async function handleRegister(){
-        console.log(`username: ${username}, difficulty: ${difficulty}`);
+        // const api = new Api();
         const res = await api.register(username);
         if (res.error) {
             console.error(res.error);

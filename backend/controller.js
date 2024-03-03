@@ -2,16 +2,7 @@ const db = require('./database');
 
 const registerUser = async (req, res) => {
   const {name} = req.body;
- let doit;
-  try {
-    await db.any('SELECT * FROM users WHERE name = $1', [name]);
-    res.status(400).json({ error: 'User already exists' });
-    doit = false;
-  } catch {
-    console.log('User does not exist');
-    doit = true;
-  }
- if (doit) {
+  
   try {
     const user = await db.any('INSERT INTO users (name) VALUES($1) RETURNING *', [name]);
     console.log(user);
@@ -20,7 +11,6 @@ const registerUser = async (req, res) => {
     console.log(error)
     res.status(400).json({ error: error.message });
   }
-}
 }
 
 const postScore = async (req, res) => {
