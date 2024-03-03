@@ -1,19 +1,26 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect, useMemo} from 'react';
 import Api from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import {context} from './root';
 import '../styles/startStyle.css';
+import getPoem from '../services/getPoem';
+// import { get, use } from '../../../backend/router';
 
 
 
 
 export default function Login() {
-    const api = new Api();
+    // function useLeaderBoard(){
+    //     let data = useLoaderData();
+    //     setLeaderBoardData(data);
+    // }
+    const api = useMemo(() => new Api(), []);
     const [username, setUsername] = useState('');
-    const {setUser, setMessage} = useContext(context);
+    const [leaderBoardData, setLeaderBoardData] = useState([]);
+    const {setUser, setMessage, setTest, test} = useContext(context);
     const [difficulty, setDifficulty] = useState('easy');
     const navigate = useNavigate();
-    const [leaderBoardData] = useState(api.getLeaderBoard());
+    // const [leaderBoardData, setLeaderBoardData] = useState(loaderData);
     async function handleRegister(){
         console.log(`username: ${username}, difficulty: ${difficulty}`);
         const res = await api.register(username);
@@ -23,10 +30,24 @@ export default function Login() {
         else{
             console.log(res);
             setUser(res[0].name);
+            setTest(await getPoem(difficulty));
+            console.log(test)
             navigate('/game');
         }
     
     }
+
+    useEffect(() => {
+       const getLeaderBoard = async () => {
+           const data = await api.getLeaderBoard();
+           setLeaderBoardData(data);
+       }
+       getLeaderBoard();
+    }, [] 
+    );
+    
+
+    
 
   return (
     <div className="leaderboard">

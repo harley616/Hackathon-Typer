@@ -1,27 +1,25 @@
 /* CSS for index page */
 .index {
-    /* background-image: url('indexBackdrop.jpeg'); */
+    display:fixed;
+    background: url('vines.png');
     background-size: cover;
-    background-position: center center; /* Center the background image both horizontally and vertically */
-    background-repeat: no-repeat;
+    z-index: 0;
 }
 
-
 .index .container {
-    display: flex;
+    display: relative;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
-}
+    z-index: 1;
 
-.index .container {
-    background-color: #dbfad0; /* Key lime color */
 }
 
 .index .big_button {
-    display: flex;
+    display: absolute;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .index .big_button button {
@@ -148,31 +146,19 @@
 /* Positioning for leaf decorations */
 .index .leaf {
     position: absolute;
+    width: 300px; /* Make the images three times bigger */
+    height: 255px; /* Make the images three times bigger */
+    border-radius: 50%; /* To make it round */
 }
 
 /* Positioning for leaf1 */
 .index .leaf1 {
-    top: 60%; /* Adjust as needed */
-    left: 10%; /* Adjust as needed */
+    top: 57%; /* Adjust as needed */
+    left: -5%; /* Adjust as needed */
 }
 
 /* Positioning for leaf2 */
 .index .leaf2 {
-    top: 60%; /* Adjust as needed */
-    right: 10%; /* Adjust as needed */
+    top: 57%; /* Adjust as needed */
+    right: 0%; /* Adjust as needed */
 }
-
-/* Positioning for leaf3 */
-.index .leaf3 {
-    bottom: 10%; /* Adjust as needed */
-    left: 20%; /* Adjust as needed */
-}
-
-/* Other styles for leaf decorations */
-.index .leaf {
-    width: 225px; /* Adjust width as needed */
-    height: 255px; /* Adjust height as needed */
-    border-radius: 50%; /* To make it round */
-    /* Add other styles as needed */
-}
-

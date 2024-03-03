@@ -26,22 +26,23 @@ export default class Api {
         }
     }
 
-    async postScore(score, name){
+    async postScore(data){
         try {
-            const response = await this.api.post('/api/score', {score: score, name: name});
-            return response.data;
+            const response = await this.api.post('/api/score', data);
+            return response;
         } catch (error) {
             return { error: error.message };
         }
     }
     async getLeaderBoard(){
-        console.log('getLeaderBoard');
-        // try {
-        //     const response = await this.api.get('/api/leaderboard');
-        //     return response.data;
-        // } catch (error) {
-        //     return { error: error.message };
-        // }
+        // console.log('getLeaderBoard');
+        try {
+            const response = await this.api.get('/api/leaderboard');
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            return { error: error.message };
+        }
     }
 
 }

@@ -1,18 +1,18 @@
-//import axios from 'axios';
-const axios = require('axios');
+import axios from 'axios';
+// const axios = require('axios');
 
 const levels={
-    easy:"5/lines",
-    medium:"10/lines",
-    hard:"15/lines"
+    easy:"2/lines",
+    medium:"5/lines",
+    hard:"8/lines"
 }
 
-export default function getPoem(level){
+export default async function getPoem(level){
     const path=levels[level];
 
-    axios.get(`https://poetrydb.org/random,linecount/3;${path}`)
+    return await axios.get(`https://poetrydb.org/random,linecount/3;${path}`)
     .then(response => {
-      const poemsinSingleString=response.data.map(poem=>poem.lines.join("\n"));
+      const poemsinSingleString=response.data.map(poem=>poem.lines.join(" "));
       console.log(poemsinSingleString);
       return poemsinSingleString;
     })
@@ -22,4 +22,4 @@ export default function getPoem(level){
     });
 }
 
-getPoem("easy");
+// getPoem("easy");

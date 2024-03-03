@@ -4,15 +4,27 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/root';
 import Login from './routes/login';
 import Game from './routes/game';
+import getPoem from './services/getPoem';
+import Api from './services/api';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+// function poemLoader() {
+//   return getPoem('medium');
+// }
+
+// function leaderboardLoader(){
+//   const api = new Api();
+//   return api.getLeaderBoard();
+// }
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     children: [
-      { path: '/login', element: <Login /> },
+      { path: '/login', element: <Login />},
       {path: '/game', element: <Game />},
     ]
   }
