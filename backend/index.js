@@ -13,9 +13,6 @@ const app = express();
 // Parse Json requests
 app.use(express.json());
 
-const errorHandler = require('errorhandler');
-app.use(errorHandler({ dumbExceptions: true, showStack: true }));
-
 // Allows cross origin requests
 const cors = require('cors');
 
