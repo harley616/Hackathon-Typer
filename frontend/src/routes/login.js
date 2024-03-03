@@ -10,15 +10,15 @@ import '../styles/startStyle.css';
 export default function Login() {
     const api = new Api();
     const [username, setUsername] = useState('');
-    const {setUser} = useContext(context);
+    const {setUser, setMessage} = useContext(context);
     const [difficulty, setDifficulty] = useState('easy');
     const navigate = useNavigate();
-    const [leaderBoardData, setLeaderBoardData] = useState(api.getLeaderBoard());
+    const [leaderBoardData] = useState(api.getLeaderBoard());
     async function handleRegister(){
         console.log(`username: ${username}, difficulty: ${difficulty}`);
         const res = await api.register(username);
         if (res.error) {
-            console.error(res.error);
+            setMessage('Name already exists!')
         }
         else{
             console.log(res);
