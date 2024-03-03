@@ -7,6 +7,7 @@ import gif2 from '../Animated GIFs/layer1.gif';
 import gif3 from '../Animated GIFs/layer2.gif';
 import gif4 from '../Animated GIFs/layer3.gif';
 import deathGif from '../Animated GIFs/flower death.gif';
+import getScore from '../services/getScore';
 
 const gifs = [gif1, gif2, gif3, gif4];
 
@@ -22,19 +23,52 @@ export default function Game() {
   const [okay, setOkay] = useState(true);
   const [done, setDone] = useState(false);
   const [wpm, setWpm] = useState(0)
+  const [typping, setTypping] = useState(false);
   const {setMessage, user} = useContext(context);
 
   function updateWpm(){
-    if (iter === 0){
-      setMessage('Need to finish first test to get a score!');
-      setWpm(0)
-    }else{
-      setWpm(
-        Math.floor((testString.split(' ').length/(Date.now() - startTime)*1000)*60)
-      )
-    } 
-    api.postScore(wpm, user);
+    setWpm(Math.floor((testString.split(' ').length/(Date.now() - startTime)*1000)*60))
   }
+  function finishedString(){
+    console.log('finishedString')
+    setIter(iter + 1);
+    setDone(true);
+    updateWpm();
+  }
+
+  function nextTest(){
+    setOkay(true);
+    setDone(false); 
+    setTest(test[iter]);
+    updateWpm();
+    setWpmList([...wpmList, wpm]); 
+    setWpm(0);
+    setTyped('')
+  }
+
+  function startOver(){
+    updateWpm();
+    handlePostScore();
+    setOkay(true); 
+    setDone(false);
+    setIter(0);
+    setTest(test[iter]); 
+    setWpm(0); 
+    setTyped('')
+
+  }
+
+  function handlePostScore(){
+    let score;
+    if (iter === 0){
+      score = getScore(wpm, typed.length + 1);
+      api.postScore(user, wpm);
+      return
+    }
+    score = getScore(avg([...wpmList, wpm]), typed.length + 1);
+    api.postScore(score, user);
+  }
+
   function avg(lst){
     let sum = 0
   
@@ -55,15 +89,14 @@ export default function Game() {
       <textarea className="w-64 h-24 bg-sky-100 text-black p-1" onChange={(e) => {
         if(e.target.value.charAt(e.target.value.length - 1) !== testString[e.target.value.length - 1]){
           setOkay(false);
-          setIter(0);
         }else{
-          if(e.target.value.charAt(e.target.value.length - 1) === testString[0]){
+          if(e.target.value.charAt(e.target.value.length - 1) === testString[0] && !typping){
+            setTypping(true);
             setStartTime(Date.now());
           }
-          else if(e.target.value.charAt(e.target.value.length - 1) === testString[testString.length -1]){
-            setDone(true);
-            setIter(iter + 1)
-            updateWpm();
+          else if(e.target.value.length === testString.length){
+            finishedString();
+            return;
           }else{
             setTyped(e.target.value)
           }
@@ -78,21 +111,20 @@ export default function Game() {
       </>
       :
       <> 
-      {/* WRITE HELPER FUNCTIONS!!! There is a bug in the logic, ends prematurely */}
       <h1> Wpm: {wpm}</h1>
-      <div onClick={() => {setOkay(true); setDone(false); setTest(test[iter]);setWpmList([...wpmList, wpm])}}>Next</div>
+      <div onClick={() => {nextTest()}}>Next</div>
       </>
       }
       </> : 
       <>
       <div> Failed</div>
-      <div onClick={() => {setOkay(true); setDone(false);setTest(test[iter]); setWpm(0)}}>Try again</div>
+      <div onClick={() => {startOver()}}>Try again</div>
       <div>You had an avg apm of: {avg(wpmList)}</div>
       </>
 
       }
       {okay ?
-       <img src ={gifs[Math.floor((typed.length / testString.length)*100/25)]} alt = 'gifs of flower'/> 
+       <img src ={gifs[Math.floor((typed.length / testString.length)*100/25)]} alt = {`gifs[${Math.floor((typed.length / testString.length)*100/25)}]`}/> 
        : <img src={deathGif} alt = 'death gif'/>}
 
       

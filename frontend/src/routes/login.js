@@ -22,7 +22,7 @@ export default function Login() {
         }
         else{
             console.log(res);
-            setUser(res.name);
+            setUser(res[0].name);
             navigate('/game');
         }
     
@@ -37,7 +37,7 @@ export default function Login() {
                 {
                 Array.isArray(leaderBoardData) ? leaderBoardData.map((data, index) => {
                     return (
-                        <li key={index}>{data.name} - {data.score}</li>
+                        <li key={data.name}>{data.name} - {data.score}</li>
                     );
                 }) : 
                     <li>Loading/Empty</li>

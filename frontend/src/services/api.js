@@ -25,6 +25,7 @@ export default class Api {
             return { error: error.message };
         }
     }
+
     async postScore(score, name){
         try {
             const response = await this.api.post('/api/score', {score: score, name: name});
