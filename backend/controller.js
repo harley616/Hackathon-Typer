@@ -2,14 +2,25 @@ const db = require('./database');
 
 const registerUser = async (req, res) => {
   const {name} = req.body;
+ let doit;
   try {
-    const user = await db.one('INSERT INTO users (name) VALUES($1) RETURNING *', [name]);
+    await db.any('SELECT * FROM users WHERE name = $1', [name]);
+    res.status(400).json({ error: 'User already exists' });
+    doit = false;
+  } catch {
+    console.log('User does not exist');
+    doit = true;
+  }
+ if (doit) {
+  try {
+    const user = await db.any('INSERT INTO users (name) VALUES($1) RETURNING *', [name]);
     console.log(user);
     res.status(201).json(user);
   } catch (error) {
     console.log(error)
     res.status(400).json({ error: error.message });
   }
+}
 }
 
 const postScore = async (req, res) => {
@@ -24,9 +35,22 @@ const postScore = async (req, res) => {
   }
 }
 
+const getLeaderBoard = async (req, res) => {
+    try {
+        const res = await db.any('SELECT * FROM scores ORDER BY score LIMIT 10');
+        console.log(res);
+        res.status(200).json(res);
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({ error: error.message });
+    }
+    
+}
+
 
 
 module.exports = {
     registerUser,
-    postScore
+    postScore,
+    getLeaderBoard
 }

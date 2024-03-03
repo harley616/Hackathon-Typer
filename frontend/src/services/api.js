@@ -33,5 +33,14 @@ export default class Api {
             return { error: error.message };
         }
     }
+    async getLeaderBoard(){
+        console.log('getLeaderBoard');
+        // try {
+        //     const response = await this.api.get('/api/leaderboard');
+        //     return response.data;
+        // } catch (error) {
+        //     return { error: error.message };
+        // }
+    }
 
 }

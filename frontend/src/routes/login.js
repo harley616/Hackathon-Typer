@@ -7,14 +7,14 @@ import '../styles/startStyle.css';
 
 
 
-
 export default function Login() {
+    const api = new Api();
     const [username, setUsername] = useState('');
     const {setUser} = useContext(context);
     const [difficulty, setDifficulty] = useState('easy');
     const navigate = useNavigate();
+    const [leaderBoardData, setLeaderBoardData] = useState(api.getLeaderBoard());
     async function handleRegister(){
-        const api = new Api();
         console.log(`username: ${username}, difficulty: ${difficulty}`);
         const res = await api.register(username);
         if (res.error) {
@@ -34,9 +34,14 @@ export default function Login() {
         <div className="top-scorers">
             <h2>Top Scorers</h2>
             <ul className="top-scorers-list">
-                <li>John Doe - 250 points</li>
-                <li>Jane Smith - 200 points</li>
-                <li>Michael Johnson - 180 points</li>
+                {
+                Array.isArray(leaderBoardData) ? leaderBoardData.map((data, index) => {
+                    return (
+                        <li key={index}>{data.name} - {data.score}</li>
+                    );
+                }) : 
+                    <li>Loading/Empty</li>
+                }
             </ul>
         </div>
         <div className="leaderboard-form">
