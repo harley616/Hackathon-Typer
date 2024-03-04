@@ -15,7 +15,7 @@ const gifs = [gif1, gif2, gif3, gif4];
 // const test = ['lorem ipsum dolor sit amet', 'consectetur adipiscing elit', 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', 'ut enim ad minim veniam', 'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat', 'duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur', 'excepteur sint occaecat cupidatat non proident', 'sunt in culpa qui officia deserunt mollit anim id est laborum']
 export default function Game() {
   // const [test] = useState(getPoem('easy'));
-  const {setMessage, user, test} = useContext(context);
+  const {setMessage, user, test, difficulty} = useContext(context);
 
   const api = new Api();
   const [wpmList, setWpmList] = useState([]);
@@ -67,11 +67,12 @@ export default function Game() {
   function handlePostScore(){
     let score;
     if (iter === 0){
-      score = getScore(wpm, typed.length + 1);
+      console.log('difficulty', difficulty)
+      score = getScore(wpm, difficulty, typed.length + 1);
       api.postScore({name: user, score: score});
       return
     }
-    score = getScore(avg([...wpmList, wpm]), typed.length + 1);
+    score = getScore(avg([...wpmList, wpm]),difficulty, typed.length + 1);
     api.postScore({name: user, score: score});
   }
 

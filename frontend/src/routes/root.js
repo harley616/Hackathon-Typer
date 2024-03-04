@@ -11,6 +11,7 @@ export default function Root() {
     const [score, setScore] = useState(0);
     const [message, setMessage] = useState('');
     const [test, setTest] = useState(['']);
+    const [difficulty, setDifficulty] = useState('easy');
     const navigate = useNavigate();
     const location = useLocation();
     setTimeout(() => {
@@ -18,7 +19,7 @@ export default function Root() {
     }, 5000);
 
   return (
-    <context.Provider value={{user, setUser, score, setScore, setMessage, test, setTest}}>
+    <context.Provider value={{user, setUser, score, setScore, setMessage, test, setTest, difficulty, setDifficulty}}>
         {message && <Message message={message}/>}
 
         {location.pathname === '/' && 

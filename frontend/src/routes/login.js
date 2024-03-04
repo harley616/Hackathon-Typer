@@ -15,8 +15,7 @@ export default function Login() {
     // }
     const api = useMemo(() => new Api(), []);
     const [username, setUsername] = useState('');
-    const {setUser, setMessage, setTest} = useContext(context);
-    const [difficulty, setDifficulty] = useState('easy');
+    const {setUser, setMessage, setTest, difficulty, setDifficulty} = useContext(context);
     const navigate = useNavigate();
     const [leaderBoardData, setLeaderBoardData] = useState(null);
     async function handleRegister(){
